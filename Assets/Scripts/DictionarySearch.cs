@@ -8,7 +8,7 @@ public class DictionarySearch
     public static DictionarySearch Instance;
     
     public List<string> foundWords = new List<string>();
-    public List<string> GetMatchedWordFromList(string searchChar, int charPos, List<string> dicRange)
+    public List<string> GetMatchedWordFromList(string searchChar, int charPos, List<string> dicRange, bool isBackward = false)
     {
         //if there is no possible word, just return the empty list
         if (dicRange.Count == 0) return dicRange;
@@ -16,9 +16,9 @@ public class DictionarySearch
         //remake the list and check one more char
         var targetNewDic = new List<string>();
         foreach (var word in dicRange)
-            if (word.Substring(charPos, 1) == searchChar)
+            if (word.Substring(isBackward?word.Length - charPos - 1 : charPos, 1) == searchChar)
                 //is checking the last char of a word
-                if (word.Length - 1 == charPos) foundWords.Add(word);
+                if (charPos == word.Length - 1) foundWords.Add(word);
                 else targetNewDic.Add(word); 
         
         return targetNewDic;
@@ -26,10 +26,13 @@ public class DictionarySearch
 
     public void SearchWordInOneLine(string line)
     {
-        var listCopies = _CreateCopyList(line.Length, DataInput.Instance.dictionary);
+        var listCopies = _CreateCopyList(line.Length * 2, DataInput.Instance.dictionary);
         for (int i = 0; i < line.Length; i++)
         for (int m = 0; m <= i; m++)
-                listCopies[m] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m]);
+        {
+            listCopies[m] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m]);
+            listCopies[m+line.Length] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m+line.Length],true);
+        }
     }
 
     private List<T> _CopyList<T>(List<T> list)

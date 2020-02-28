@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class Game : MonoBehaviour
             DataInput.Instance = new DataInput();
         if(DictionarySearch.Instance == null) 
             DictionarySearch.Instance = new DictionarySearch();
+        
+        
     }
 
     // Update is called once per frame

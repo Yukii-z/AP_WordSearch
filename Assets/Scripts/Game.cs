@@ -23,7 +23,7 @@ public class Game : MonoBehaviour
     {
         Services._DataInput.StartData(); // i hate jobs
         // horizontal search
-        for (int i = 0; i < Services._DataInput.search.Length; i++)
+        for (int i = 0; i < Services._DataInput.search.Count; i++)
         {
             Services._dictionarySearch.SearchWordInOneLine(Services._DataInput.search[i]);
         }
@@ -34,6 +34,8 @@ public class Game : MonoBehaviour
         
         //print any found words 
         Debug.Log(Services._dictionarySearch.foundWords.Count);
+        foreach (var word in Services._dictionarySearch.foundWords)
+            Debug.Log(word);
 
     }
 

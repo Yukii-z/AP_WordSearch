@@ -22,7 +22,13 @@ public class DictionarySearch
     {
         //to save steps, a lot of works need to be done when loop through all the letters in the line
         //The lists are created first to make sure multiple word checking are being done in the same time
-        var listCopies = _CreateCopyList(line.Length * 2, Services._DataInput.dictionary);
+        var listCopies = _CreateCopyList(line.Length * 2, new List<string>());
+        for (int n = 0; n < line.Length; n++)
+        {
+            var letter = line.Substring(n, 1);
+            listCopies[n] = _CopyList(Services._DataInput.bookOfWords[letter.ToLower()]);
+            listCopies[n+line.Length] = _CopyList(Services._DataInput.bookOfBackWords[letter.ToLower()]);
+        }
         
         //consider only checking forward
         //line[0] can only be the first letter of a word
@@ -33,7 +39,7 @@ public class DictionarySearch
         for (int m = 0; m <= i; m++)
         {
             listCopies[m] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m]);
-          //  listCopies[m+line.Length] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m+line.Length],true);
+            listCopies[m+line.Length] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m+line.Length],true);
         }
         
         
@@ -63,9 +69,7 @@ public class DictionarySearch
         var targetNewDic = new List<string>();
         foreach (var word in dicRange)
         {
-            //if (word.Substring(isBackward? (word.Length - charPos - 1) : charPos, 1) == searchChar)
-            Debug.Log(charPos);
-            if (word.Substring(charPos, 1) == searchChar)
+            if (word.Substring(isBackward? (word.Length - charPos - 1) : charPos, 1).ToLower() == searchChar.ToLower())
                 //is checking the last char of a word
                 if (charPos == word.Length - 1) foundWords.Add(word);
                 else targetNewDic.Add(word);

@@ -5,12 +5,13 @@ using System.ComponentModel.Design.Serialization;
 using UnityEditor;
 using UnityEngine;
 
-public class DataInput :MonoBehaviour
+public class DataInput 
 {
     public static DataInput Instance;
     public List<string> dictionary = new List<string>();
+    public string[] search; 
 
-    void Start()
+    public void StartData()
     {
         InputDictionary();
         InputMap();
@@ -23,7 +24,7 @@ public class DataInput :MonoBehaviour
         var wordsearch3 = Resources.Load<TextAsset>("wordsearch_3");
 
         //store every line of the search 
-        var search = wordsearch.text.Split((new[] {"\n"}), StringSplitOptions.None); 
+        search = wordsearch.text.Split((new[] {"\n"}), StringSplitOptions.None); 
         
         Debug.Log(search[0]);
     }
@@ -34,6 +35,6 @@ public class DataInput :MonoBehaviour
         var dic = Resources.Load<TextAsset>("dictionary");
         //everword in the dictionary will be put into an array, they are separated by the next line'
         var word = dic.text.Split((new[] {"\n"}),StringSplitOptions.None); 
-        Debug.Log(word[0]+ word[1]);
+        Debug.Log(word[0]+" "+ word[1]);
     }
 }

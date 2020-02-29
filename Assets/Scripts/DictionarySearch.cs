@@ -22,7 +22,7 @@ public class DictionarySearch
     {
         //to save steps, a lot of works need to be done when loop through all the letters in the line
         //The lists are created first to make sure multiple word checking are being done in the same time
-        var listCopies = _CreateCopyList(line.Length * 2, DataInput.Instance.dictionary);
+        var listCopies = _CreateCopyList(line.Length * 2, Services._DataInput.dictionary);
         
         //consider only checking forward
         //line[0] can only be the first letter of a word
@@ -35,6 +35,8 @@ public class DictionarySearch
             listCopies[m] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m]);
             listCopies[m+line.Length] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m+line.Length],true);
         }
+        
+        
     }
     
     /// <summary>

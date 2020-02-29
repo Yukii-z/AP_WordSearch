@@ -22,11 +22,11 @@ public class Game : MonoBehaviour
     void Start()
     {
         Services._DataInput.StartData(); // i hate jobs
-        // horizontal search
-        for (int i = 0; i < Services._DataInput.search.Length; i++)
+        // horizontal searcunih
+        /*for (int i = 0; i < Services._DataInput.search.Count; i++)
         {
-            Services._dictionarySearch.SearchWordInOneLine(Services._DataInput.search[i]);
-        }
+            //Services._dictionarySearch.SearchWordInOneLine(Services._DataInput.search[i]);
+        }*/
         
         // vertical search
         

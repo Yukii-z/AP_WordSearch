@@ -10,8 +10,9 @@ public class DataInput
 {
     public static DataInput Instance;
     public Dictionary<string, List<string>> BookOfWords = new Dictionary<string, List<string>>(); 
-    //public List<string> dictionary = new List<string>();
-    public string[] search; 
+    public List<string> dictionary = new List<string>();
+    public List<string> wordSearchHorizontal;
+    public List<string> wordSearchVertical = new List<string>();
 
     public void StartData()
     {
@@ -26,12 +27,18 @@ public class DataInput
         var wordsearch3 = Resources.Load<TextAsset>("wordsearch_3");
 
         //store every line of the search for horizontal search
-        search = wordsearch.text.Split((new[] {"\n"}), StringSplitOptions.None); 
+        wordSearchHorizontal = wordsearch.text.Split((new[] {"\n"}), StringSplitOptions.None).ToList();
+
+        Debug.Log(wordSearchHorizontal[0]); 
         
         //store every line of search for vertical search 
-        
-        
-        Debug.Log(search[0]);
+        foreach (var line in wordSearchHorizontal)
+        {
+            wordSearchVertical.Add(line.Substring(0,1)); 
+        }
+
+        Debug.Log(wordSearchHorizontal[0]);
+        Debug.Log(wordSearchVertical[0]);
     }
 
     public void InputDictionary()
@@ -39,11 +46,10 @@ public class DataInput
         //save a reference to the dictionary 
         var dic = Resources.Load<TextAsset>("dictionary");
         //everword in the dictionary will be put into an array, they are separated by the next line'
-        var dictionary = dic.text.Split((new[] {"\n"}), StringSplitOptions.None); 
-
+        dictionary = dic.text.Split((new[] {"\n"}), StringSplitOptions.None).ToList();
+        dictionary.Remove(dictionary[dictionary.Count - 1]);
         //maybe the dictionary needs to be split into multiple Lists for each letter -
-        
-       // BookOfWords = dic.text.Split(new Char[] {'\n'}).ToDictionary(w => w);
+        // BookOfWords = dic.text.Split(ne Char[] {'\n'}).ToDictionary(w => w);
 
        foreach (var word in dictionary)
        {

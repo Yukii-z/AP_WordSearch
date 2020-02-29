@@ -33,7 +33,7 @@ public class DictionarySearch
         for (int m = 0; m <= i; m++)
         {
             listCopies[m] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m]);
-            listCopies[m+line.Length] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m+line.Length],true);
+          //  listCopies[m+line.Length] = GetMatchedWordFromList(line.Substring(i, 1), i-m, listCopies[m+line.Length],true);
         }
         
         
@@ -62,17 +62,21 @@ public class DictionarySearch
         //remake the list and check one more char
         var targetNewDic = new List<string>();
         foreach (var word in dicRange)
-            if (word.Substring(isBackward?word.Length - charPos - 1 : charPos, 1) == searchChar)
+        {
+            //if (word.Substring(isBackward? (word.Length - charPos - 1) : charPos, 1) == searchChar)
+            Debug.Log(charPos);
+            if (word.Substring(charPos, 1) == searchChar)
                 //is checking the last char of a word
                 if (charPos == word.Length - 1) foundWords.Add(word);
-                else targetNewDic.Add(word); 
-        
+                else targetNewDic.Add(word);
+        }
+
         return targetNewDic;
     }
 
     private List<T> _CopyList<T>(List<T> list)
     {
-        var tempArray = new T[0];
+        var tempArray = new T[list.Count];
         list.CopyTo(tempArray);
         return tempArray.ToList();
     }

@@ -28,7 +28,9 @@ public class DataInput
 
         //store every line of the search for horizontal search
         wordSearchHorizontal = wordsearch.text.Split((new[] {"\n"}), StringSplitOptions.None).ToList();
+        var lengthOfHorizontal = wordSearchHorizontal.Count-1; //remove the last item because it's blank'
 
+        wordSearchHorizontal.RemoveAt(lengthOfHorizontal);
         Debug.Log(wordSearchHorizontal[0]); 
         
         //store every line of search for vertical search 
@@ -36,6 +38,8 @@ public class DataInput
         {
             wordSearchVertical.Add(line.Substring(0,1)); 
         }
+        
+      
 
         Debug.Log(wordSearchHorizontal[0]);
         Debug.Log(wordSearchVertical[0]);

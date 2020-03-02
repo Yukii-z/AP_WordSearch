@@ -70,6 +70,7 @@ public class DictionarySearch
                 if (charPos == word.Length - 1) foundWords.Add(word);
                 else targetNewDic.Add(word);
         }
+        
 
         return targetNewDic;
     }

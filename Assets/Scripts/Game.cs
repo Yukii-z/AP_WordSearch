@@ -21,7 +21,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Services._DataInput.StartData(); // i hate jobs
+        Services._DataInput.StartData(); 
         // horizontal searcunih
         /*for (int i = 0; i < Services._DataInput.search.Count; i++)
         {
